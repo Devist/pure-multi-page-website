@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LDCC-근태 관리 시스템</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+  <link href="/commons/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 네비게이션 -->
+  <!-- 네비게이션 -->
+<nav class="bg-black w-full flex items-center justify-between">
+  <div id="companyName" class="text-bold-500 text-white">헤더 타이틀</div>
+  <div class="flex">
+    <div id="position"></div>
+    <div id="userName" class="ml-2"></div>
+    <input id="btnLogout" type="button" class="button-logout cursor-pointer text-black rounded ml-2" value="로그아웃">
+  </div>
+</nav>
+<!-- /네비게이션 -->
+
+  <!-- 컨텐츠 -->
+  <div class="page-content border-top-danger flex p-5">
+    <!-- 왼쪽 여백 -->
+    <div class="w-1/6"></div>
+
+    <!-- 본문 -->
+    <div class="w-4/6">
+
+      <!-- 탭 버튼 모음 -->
+      <ul class="flex border-b">
+        <li id="btnGoTaTab" class="flex-1 mr-2">
+          <a id="tabTa"
+            class="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white"
+            href="#">근태</a>
+        </li>
+        <li id="btnGoVacationTab" class="flex-1 mr-2">
+          <a id="tabVacation"
+            class="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4"
+            href="#">휴가</a>
+        </li>
+      </ul>
+
+      <!-- 컨텐츠 -->
+      <div id="tabsContent" class="mt-10"></div>
+    </div>
+
+    <!-- 오른쪽 여백 -->
+    <div class="w-1/6"></div>
+  </div>
+
+  <!-- 푸터 -->
+  <!-- 푸터 -->
+<footer class="flex items-center justify-end">
+  <div>copyrightⓒ 2008 All rights reserved by </div>
+  <a class="ml-1 mr-5 underline" href="https://github.com/ivarprudnikov/webpack-static-html-pages">LDCC</a>
+</footer>
+<!-- /푸터 -->
+
+  <script type="text/javascript" src="/commons/leaderUtils.js"></script>
+<script type="text/javascript" src="leader.96199d88ea51a4e05ee3.js"></script></body>
+
+</html>

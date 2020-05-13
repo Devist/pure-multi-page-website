@@ -1,0 +1,23 @@
+.input-id {
+  border: 1px solid black;
+}
+
+.input-pw {
+  border :1px solid black;
+}
+
+.text-placeholder {
+  width:50px;
+}
+
+.box-login {
+  border: 1px solid black;
+}
+
+.button-login {
+  border-radius:25px;
+  font-size:15px;
+  padding: 0.4rem 1rem;
+  background:black;
+  color:white;
+}

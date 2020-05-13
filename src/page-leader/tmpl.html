@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LDCC-근태 관리 시스템</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+  <link href="/commons/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 네비게이션 -->
+  <%= require('html-loader!../partials/nav.html') %>
+
+  <!-- 컨텐츠 -->
+  <div class="page-content border-top-danger flex p-5">
+    <!-- 왼쪽 여백 -->
+    <div class="w-1/6"></div>
+
+    <!-- 본문 -->
+    <div class="w-4/6">
+
+      <!-- 탭 버튼 모음 -->
+      <ul class="flex border-b">
+        <li id="btnGoTaTab" class="flex-1 mr-2">
+          <a id="tabTa"
+            class="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white"
+            href="#">근태</a>
+        </li>
+        <li id="btnGoVacationTab" class="flex-1 mr-2">
+          <a id="tabVacation"
+            class="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4"
+            href="#">휴가</a>
+        </li>
+      </ul>
+
+      <!-- 컨텐츠 -->
+      <div id="tabsContent" class="mt-10"></div>
+    </div>
+
+    <!-- 오른쪽 여백 -->
+    <div class="w-1/6"></div>
+  </div>
+
+  <!-- 푸터 -->
+  <%= require('html-loader!../partials/footer.html') %>
+
+  <script type="text/javascript" src="/commons/leaderUtils.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LDCC-근태 관리 시스템(직원용)</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+  <link href="/commons/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- 네비게이션 -->
+  <!-- 네비게이션 -->
+<nav class="bg-black w-full flex items-center justify-between">
+  <div id="companyName" class="text-bold-500 text-white">헤더 타이틀</div>
+  <div class="flex">
+    <div id="position"></div>
+    <div id="userName" class="ml-2"></div>
+    <input id="btnLogout" type="button" class="button-logout cursor-pointer text-black rounded ml-2" value="로그아웃">
+  </div>
+</nav>
+<!-- /네비게이션 -->
+
+  <!-- 컨텐츠 -->
+  <div class="page-content flex p-5">
+    <!-- 왼쪽 여백 -->
+    <div class="w-1/6"></div>
+
+    <!-- 본문 -->
+    <div class="w-4/6">
+
+      <!-- 출퇴근 기록 컴포넌트-->
+      <div class="flex justify-between items-center border border-black p-2">
+        <div class="flex">
+          <div class="px-1 mb-6 md:mb-0 flex items-center">
+  <div class="relative">
+    근무일 <input id="inputTaDate" type="date">
+  </div>
+</div>
+          <div class="px-1 ml-3 mb-6 md:mb-0 flex items-center">
+  출근 시간
+  <div class="relative ml-1">
+    <select id="selectorTimeTo"
+      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      id="grid-state">
+      <option>06:00</option>
+      <option>6:30</option>
+      <option>7:00</option>
+      <option>7:30</option>
+      <option>8:00</option>
+      <option>8:30</option>
+      <option>9:00</option>
+      <option>9:30</option>
+      <option>10:00</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+    </div>
+  </div>
+</div>
+          <div class="ml-3 px-1 flex items-center">
+  퇴근 시간
+  <div class="relative ml-2">
+    <select id="selectorTimeOff"
+      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      id="grid-state">
+      <option>16:00</option>
+      <option>16:30</option>
+      <option>17:00</option>
+      <option>17:30</option>
+      <option>18:00</option>
+      <option>18:30</option>
+      <option>19:00</option>
+      <option>19:30</option>
+      <option>20:00</option>
+      <option>20:30</option>
+      <option>21:00</option>
+      <option>21:30</option>
+      <option>22:00</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+    </div>
+  </div>
+</div>
+        </div>
+
+        <input id="btnCommute" type="button" class="button-commute cursor-pointer ml-2" value="근무내역 등록하기">
+        <div class="divider" style="width:1px; height:50px; border:1px solid gray"></div>
+        <input type="button" class="button-commute cursor-pointer ml-2" value="휴가 관리">
+      </div>
+
+      <!-- 월 이동 컴포넌트 -->
+      <div class="flex w-full justify-center items-center pt-2 pb-2 border-t mt-5 mb-5 border-b">
+        <!-- 이전 버튼 -->
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+          이전
+        </button>
+
+        <!-- 현재 월 -->
+        <div class="text-bold-500 ml-5 mr-5">2019년 11월</div>
+
+        <!-- 다음 버튼 -->
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+          다음
+        </button>
+      </div>
+
+      <!-- 근태 표출 컴포넌트 -->
+      <div class="flex mt-3">
+        <table class="table-fixed w-full">
+          <thead>
+            <tr>
+              <th class="w-1/5 px-4 py-2">주간 상태</th>
+              <th class="w-1/5 px-4 py-2">일자</th>
+              <th class="w-1/5 px-4 py-2">출근시각</th>
+              <th class="w-1/5 px-4 py-2">퇴근시각</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 주차별 -->
+            <tr class="bg-gray-100 border-t-2 border-gray-600">
+              <td rowspan="5" class="border px-4 py-3">
+                <div class="text-bold-500 text-center">1주차</div>
+                <div class="rounded-full bg-green-400 p-4 pt-1 pb-1 text-center m-2">정상</div>
+                <div class="rounded-full bg-red-600 p-4 pt-1 pb-1 text-center text-white m-2">초과</div>
+                <div class="rounded-full bg-yellow-400 p-4 pt-1 pb-1 text-center m-2">부족</div>
+                <div class="text-bold-500 text-center">총 합 : 48시간</div>
+              </td>
+              <td class="border px-4 py-3 flex">
+                <div>11월 1일</div>
+              </td>
+              <td class="border px-4 py-3"><input id="inputStartTimeDay1" value="09:00" disabled></td>
+              <td class="border px-4 py-3"><input id="inputEndTimeDay1" value="18:00" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">
+                <input id="btnEditDay1" type="button" class="cursor-pointer " value="수정하기">
+                <input id="btnSaveDay1" type="button" class="cursor-pointer hidden" value="저장">
+                <input id="btnCancelDay1" type="button" class="cursor-pointer hidden ml-2" value="취소">
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 2일</div>
+              </td>
+              <td class="border px-4 py-3"><input id="inputStartTimeDay2" value="09:00" disabled></td>
+              <td class="border px-4 py-3"><input id="inputEndTimeDay2" value="18:00" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">
+                <input id="btnEditDay2" type="button" class="cursor-pointer " value="수정하기">
+                <input id="btnSaveDay2" type="button" class="cursor-pointer hidden" value="저장">
+                <input id="btnCancelDay2" type="button" class="cursor-pointer hidden" value="취소">
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 3일</div>
+              </td>
+              <td class="border px-4 py-3"><input id="inputStartTimeDay3" value="09:00" disabled></td>
+              <td class="border px-4 py-3"><input id="inputEndTimeDay3" value="18:00" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">
+                <input id="btnEditDay3" type="button" class="cursor-pointer " value="수정하기">
+                <input id="btnSaveDay3" type="button" class="cursor-pointer hidden" value="저장">
+                <input id="btnCancelDay3" type="button" class="cursor-pointer hidden" value="취소">
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 4일</div>
+              </td>
+              <td class="border px-4 py-3"><input id="inputStartTimeDay4" value="09:00" disabled></td>
+              <td class="border px-4 py-3"><input id="inputEndTimeDay4" value="18:00" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">
+                <input id="btnEditDay4" type="button" class="cursor-pointer " value="수정하기">
+                <input id="btnSaveDay4" type="button" class="cursor-pointer hidden" value="저장">
+                <input id="btnCancelDay4" type="button" class="cursor-pointer hidden" value="취소">
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 5일</div>
+              </td>
+              <td class="border px-4 py-3"><input id="inputStartTimeDay5" value="09:00" disabled></td>
+              <td class="border px-4 py-3"><input id="inputEndTimeDay5" value="18:00" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">
+                <input id="btnEditDay5" type="button" class="cursor-pointer" value="수정하기">
+                <input id="btnSaveDay5" type="button" class="cursor-pointer hidden" value="저장">
+                <input id="btnCancelDay5" type="button" class="cursor-pointer hidden" value="취소">
+              </td>
+            </tr>
+            <!-- /주차별 -->
+
+            <!-- 주차별 -->
+            <tr class="bg-gray-100 border-t-2 border-gray-600">
+              <td rowspan="5" class="border px-4 py-3">
+                <div class="text-bold-500 text-center">2주차</div>
+                <div class="rounded-full bg-green-400 p-4 pt-1 pb-1 text-center m-2">정상</div>
+                <div class="rounded-full bg-red-600 p-4 pt-1 pb-1 text-center text-white m-2">초과</div>
+                <div class="rounded-full bg-yellow-400 p-4 pt-1 pb-1 text-center m-2">부족</div>
+                <div class="text-bold-500 text-center">총 합 : - 시간</div>
+              </td>
+              <td class="border px-4 py-3 flex">
+                <div>11월 8일</div>
+              </td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">-</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 9일</div>
+              </td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">-</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 10일</div>
+              </td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">-</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 11일</div>
+              </td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">-</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-3 flex">
+                <div>11월 12일</div>
+              </td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3"><input value="-" disabled></td>
+              <td class="border px-4 py-3 flex justify-center">-</td>
+            </tr>
+            <!-- /주차별 -->
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 오른쪽 여백 -->
+    <div class="w-1/6"></div>
+  </div>
+
+  <!-- 푸터 -->
+  <!-- 푸터 -->
+<footer class="flex items-center justify-end">
+  <div>copyrightⓒ 2008 All rights reserved by </div>
+  <a class="ml-1 mr-5 underline" href="https://github.com/ivarprudnikov/webpack-static-html-pages">LDCC</a>
+</footer>
+<!-- /푸터 -->
+
+  <script type="text/javascript" src="/commons/staffUtils.js"></script>
+<script type="text/javascript" src="staff.96199d88ea51a4e05ee3.js"></script></body>
+
+</html>
